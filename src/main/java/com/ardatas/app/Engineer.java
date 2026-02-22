@@ -12,6 +12,9 @@ import java.util.Objects;
 
 // A JPA entity is a database row that is mapped to a java object,
 // Every instance of the entity repesents a row int the table
+
+// Entities are passed directly to the api,
+// instead i need to use java records as DTOs
 @Entity
 public class Engineer {
 

@@ -1,5 +1,7 @@
 package com.ardatas.app;
 
+import com.ardatas.dto.CreateEngineerRecord;
+import com.ardatas.dto.EngineerRecord;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,19 +22,18 @@ public class EngineerController {
 
     // FOR RETRIEVEL
     @GetMapping()
-    public List<Engineer> getEngineers() {
+    public List<EngineerRecord> getEngineers() {
         return engineerService.getEngineers();
     }
 
     @GetMapping("/{id}")
-    public Engineer getOneEngineer(@PathVariable Integer id) {
+    public EngineerRecord getOneEngineer(@PathVariable Integer id) {
         return engineerService.getOneEngineer(id);
     }
 
-    // Requestbody uses the object in the json and makes it into an Engineer Object
     @PostMapping
-    public Engineer putEngineer(@Valid @RequestBody Engineer engineer) {
-        return engineerService.addEngineer(engineer);
+    public EngineerRecord putEngineer(@Valid @RequestBody CreateEngineerRecord create) {
+        return engineerService.addEngineer(create);
     }
 
     @DeleteMapping("/{id}")
