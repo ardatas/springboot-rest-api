@@ -23,3 +23,15 @@ This project demonstrates Springboot fundamentals, Exception handling, JPA and d
 | POST   | /api/v1/engineers          | Create new engineer   |
 | PUT    | /api/v1/engineers/{id}     | Update engineer by id |
 | DELETE | /api/v1/engineers/{id}     | Delete engineer by id |
+
+
+
+# Example Error Response
+
+{
+  "timestamp": "2026-02-22T09:03:33",
+  "status": 404,
+  "error": "Not Found",
+  "message": "Engineer with id 1 is not found",
+  "path": "/api/v1/engineers/1"
+}
