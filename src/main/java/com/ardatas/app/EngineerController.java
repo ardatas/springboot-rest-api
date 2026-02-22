@@ -1,5 +1,6 @@
-package com.ardatas;
+package com.ardatas.app;
 
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +31,7 @@ public class EngineerController {
 
     // Requestbody uses the object in the json and makes it into an Engineer Object
     @PostMapping
-    public Engineer putEngineer(@RequestBody Engineer engineer) {
+    public Engineer putEngineer(@Valid @RequestBody Engineer engineer) {
         return engineerService.addEngineer(engineer);
     }
 

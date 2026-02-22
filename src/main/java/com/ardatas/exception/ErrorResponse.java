@@ -1,8 +1,40 @@
-package com.ardatas;
+package com.ardatas.exception;
+import java.time.LocalDateTime;
 
-import org.apache.catalina.connector.Response;
+public class ErrorResponse{
 
-public class ErrorResponse extends Response {
+    private LocalDateTime timeStamp;
+    private int status;
+    private String error;
+    private String message;
+    private String path;
 
+    public ErrorResponse(LocalDateTime timeStamp, int status, String error, String message, String path) {
+        this.timeStamp = timeStamp;
+        this.status = status;
+        this.error = error;
+        this.message = message;
+        this.path = path;
+    }
+
+    public LocalDateTime getTimeStamp() {
+        return timeStamp;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public String getPath() {
+        return path;
+    }
 }
 

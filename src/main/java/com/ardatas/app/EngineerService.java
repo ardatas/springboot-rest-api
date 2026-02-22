@@ -1,8 +1,9 @@
-package com.ardatas;
+package com.ardatas.app;
 
+import com.ardatas.exception.EngineerNotFoundException;
 import jakarta.transaction.Transactional;
+import org.apache.catalina.Engine;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
@@ -31,7 +32,12 @@ public class EngineerService {
     }
 
     public void deleteEngineerById(Integer id) {
-        engineerRepository.deleteById(id);
+
+        Engineer engineer = engineerRepository.findById(id)
+                        .orElseThrow(() -> new EngineerNotFoundException("Engineer with id " + id + " is not found!"));
+
+        engineerRepository.delete(engineer);
+
     }
 
     @Transactional

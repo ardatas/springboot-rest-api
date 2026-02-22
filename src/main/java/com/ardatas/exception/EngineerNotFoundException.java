@@ -1,4 +1,4 @@
-package com.ardatas;
+package com.ardatas.exception;
 
 public class EngineerNotFoundException extends RuntimeException {
     public EngineerNotFoundException(String message) {

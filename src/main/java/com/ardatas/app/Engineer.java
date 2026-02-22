@@ -1,9 +1,11 @@
-package com.ardatas;
+package com.ardatas.app;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Objects;
 
@@ -18,8 +20,13 @@ public class Engineer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     //this is a row
     private Integer id;
+
+    // VALIDATION WITH NOT BLANK
+    // DEPENDENCIES FOR VALIDATION: H2 SQL, SP Starter Validation (Bean)
     // this is a row
+    @NotBlank(message = "Name is mandatory")
     private String name;
+    @NotBlank(message = "Tech stack is mandatory")
     private String techStack;
 
 
