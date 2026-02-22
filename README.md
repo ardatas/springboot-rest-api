@@ -28,6 +28,7 @@ This project demonstrates Springboot fundamentals, Exception handling, JPA and d
 
 # Example Error Response
 
+```json
 {
   "timestamp": "2026-02-22T09:03:33",
   "status": 404,
@@ -35,3 +36,4 @@ This project demonstrates Springboot fundamentals, Exception handling, JPA and d
   "message": "Engineer with id 1 is not found",
   "path": "/api/v1/engineers/1"
 }
+```
