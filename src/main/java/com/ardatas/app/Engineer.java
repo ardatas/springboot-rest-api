@@ -37,7 +37,6 @@ public class Engineer {
     private String techStack;
 
     // defines one engineer -> many projects relationship
-    @Size(max=10)
     @OneToMany(mappedBy =  "engineer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Project> projects = new ArrayList<>();
 

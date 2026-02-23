@@ -2,6 +2,7 @@ package com.ardatas.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import org.jspecify.annotations.NonNull;
+import java.util.List;
 
 public record EngineerRecord(
         @NonNull
@@ -9,8 +10,7 @@ public record EngineerRecord(
         @NotBlank(message = "Name is mandatory")
         String name,
         @NotBlank(message = "Tech stack is mandatory")
-        String techStack) {
-
-};
+        String techStack,
+        List<ProjectRecord> projects) {};
 
 

@@ -23,7 +23,11 @@ public class EngineerService {
     }
 
     private static EngineerRecord convertToRecord(Engineer engineer) {
-        return new EngineerRecord(engineer.getId(), engineer.getName(), engineer.getTechStack());
+        List<ProjectRecord> projectRecordList = engineer.getProjects().stream()
+                .map(p -> new ProjectRecord(p.getId(), p.getProjectName(), p.getStartDate(), p.getEngineer().getId()))
+                .toList();
+
+        return new EngineerRecord(engineer.getId(), engineer.getName(), engineer.getTechStack(), projectRecordList);
     }
 
     private static ProjectRecord convertToRecord(Project project) {
