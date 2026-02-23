@@ -1,9 +1,6 @@
 package com.ardatas.app;
 
-import com.ardatas.dto.CreateEngineerRecord;
-import com.ardatas.dto.CreateProjectRecord;
-import com.ardatas.dto.EngineerRecord;
-import com.ardatas.dto.ProjectRecord;
+import com.ardatas.dto.*;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,9 +12,11 @@ import java.util.List;
 
 public class EngineerController {
     private final EngineerService engineerService;
+    private final EngineerRepository engineerRepository;
 
-    public EngineerController(EngineerService engineerService) {
+    public EngineerController(EngineerService engineerService, EngineerRepository engineerRepository) {
         this.engineerService = engineerService;
+        this.engineerRepository = engineerRepository;
     }
 
     // everything exposed to API is called Controller
@@ -48,6 +47,11 @@ public class EngineerController {
         engineerService.deleteEngineerFromTop();
     }
 
+    @PatchMapping("/{id}")
+    public EngineerRecord updateEngineer(@PathVariable Integer id, @RequestBody UpdateEngineerRecord engineerRecord) {
+        return engineerService.updateEngineer(id, engineerRecord);
+    }
+
     // Projects
 
     @PostMapping("/{id}/projects")
@@ -59,6 +63,7 @@ public class EngineerController {
     public void deleteProjectById(@PathVariable Integer engineerId, @PathVariable Integer projectId) {
         engineerService.deleteProjectById(engineerId, projectId);
     }
+
 
 }
 

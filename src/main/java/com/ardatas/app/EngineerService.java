@@ -1,9 +1,6 @@
 package com.ardatas.app;
 
-import com.ardatas.dto.CreateEngineerRecord;
-import com.ardatas.dto.CreateProjectRecord;
-import com.ardatas.dto.EngineerRecord;
-import com.ardatas.dto.ProjectRecord;
+import com.ardatas.dto.*;
 import com.ardatas.exception.EngineerNotFoundException;
 import com.ardatas.exception.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
@@ -60,6 +57,22 @@ public class EngineerService {
     public void deleteEngineerFromTop() {
         engineerRepository.findTopByOrderByIdAsc()
                 .ifPresent(engineerRepository::delete);
+    }
+
+    public EngineerRecord updateEngineer(Integer id, UpdateEngineerRecord update) {
+        Engineer engineer = engineerRepository.findById(id)
+                .orElseThrow(() -> new EngineerNotFoundException("Engineer with id " + id + " is not found!"));
+
+        if(update.name() != null) {
+            engineer.setName(update.name());
+        }
+
+        if(update.techStack() != null) {
+            engineer.setTechStack(update.techStack());
+        }
+
+        engineerRepository.save(engineer);
+        return convertToRecord(engineer);
     }
 
 
