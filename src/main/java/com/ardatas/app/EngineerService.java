@@ -107,9 +107,10 @@ public class EngineerService {
     }
 
     public void deleteProjectOnTop(Integer id) {
-        Project project = projectRepository.findTopByEngineerIdOrderByIdAsc(id)
-                .orElseThrow(() -> new ProjectNotFoundException("There is no project to delete from top!"));
-
-        projectRepository.delete(project);
+        projectRepository.findTopByEngineerIdOrderByIdAsc(id)
+                .ifPresentOrElse(
+                    projectRepository::delete,
+                    () -> {throw new ProjectNotFoundException("There is no project to delete from top!"); }
+                );
     }
 }
