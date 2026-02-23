@@ -105,4 +105,11 @@ public class EngineerService {
 
         projectRepository.delete(project);
     }
+
+    public void deleteProjectOnTop(Integer id) {
+        Project project = projectRepository.findTopByEngineerIdOrderByIdAsc(id)
+                .orElseThrow(() -> new ProjectNotFoundException("There is no project to delete from top!"));
+
+        projectRepository.delete(project);
+    }
 }

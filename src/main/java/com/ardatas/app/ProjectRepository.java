@@ -14,4 +14,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
             """)
     Optional<Project> findProjectById(Integer engineerId, Integer projectId);
 
+    Optional<Project> findTopByEngineerIdOrderByIdAsc(Integer engineerId);
 }

@@ -1,6 +1,7 @@
 package com.ardatas.app;
 
 import com.ardatas.dto.*;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,6 +67,12 @@ public class EngineerController {
     @DeleteMapping("/{engineerId}/projects/{projectId}")
     public void deleteProjectById(@PathVariable Integer engineerId, @PathVariable Integer projectId) {
         engineerService.deleteProjectById(engineerId, projectId);
+    }
+
+    @Transactional
+    @DeleteMapping("/{id}/projects/top")
+    public void deleteProjectOnTop(@PathVariable Integer id) {
+        engineerService.deleteProjectOnTop(id);
     }
 
 
