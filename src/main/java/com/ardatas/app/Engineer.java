@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.jspecify.annotations.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +21,8 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@ToString
+@EqualsAndHashCode
 @Entity
 public class Engineer {
 
@@ -50,15 +53,5 @@ public class Engineer {
         project.setEngineer(this);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Engineer engineer = (Engineer) o;
-        return Objects.equals(id, engineer.id) && Objects.equals(name, engineer.name) && Objects.equals(techStack, engineer.techStack);
-    }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, techStack);
-    }
 }
