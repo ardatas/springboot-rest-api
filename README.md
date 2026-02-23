@@ -19,11 +19,12 @@ This project demonstrates Springboot fundamentals, Exception handling, JPA and d
 | Method | Endpoint                   | Description           |
 |--------|--------------------------- |-----------------------|
 | GET    | /api/v1/engineers          | Get all engineers     |
-| GET    | /api/v1/engineers/{id}     | Get engineer by id    |
+| GET    | /api/v1/engineers/{engineerId}     | Get engineer by id    |
 | POST   | /api/v1/engineers          | Create new engineer   |
-| PUT    | /api/v1/engineers/{id}     | Update engineer by id |
-| DELETE | /api/v1/engineers/{id}     | Delete engineer by id |
-
+| PUT    | /api/v1/engineers/{engineerId}     | Update engineer by id |
+| DELETE | /api/v1/engineers/{engineerId}     | Delete engineer by id |
+| POST| /api/v1/engineers/{engineerId}/projects | Create new project|
+| DELETE | /api/v1/engineers/{engineerId}/projects/{projectId} | Delete project by id|
 
 
 # Example Error Response
