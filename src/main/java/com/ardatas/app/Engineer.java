@@ -1,12 +1,12 @@
 package com.ardatas.app;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import org.jspecify.annotations.NonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -32,6 +32,11 @@ public class Engineer {
     @NotBlank(message = "Tech stack is mandatory")
     private String techStack;
 
+    @Size(max=10)
+    // defines one engineer -> many projects relationship
+    @OneToMany(mappedBy =  "engineer", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Project> projects = new ArrayList<>();
+
 
     protected Engineer() {}
 
@@ -40,6 +45,7 @@ public class Engineer {
         this.name = name;
         this.techStack = techStack;
     }
+
 
     public Integer getId() {
         return id;
@@ -59,6 +65,15 @@ public class Engineer {
 
     public void setTechStack(String techStack) {
         this.techStack = techStack;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void addProject(Project project) {
+        projects.add(project);
+        project.setEngineer(this);
     }
 
     @Override

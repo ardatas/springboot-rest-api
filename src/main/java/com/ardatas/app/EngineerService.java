@@ -1,8 +1,11 @@
 package com.ardatas.app;
 
 import com.ardatas.dto.CreateEngineerRecord;
+import com.ardatas.dto.CreateProjectRecord;
 import com.ardatas.dto.EngineerRecord;
+import com.ardatas.dto.ProjectRecord;
 import com.ardatas.exception.EngineerNotFoundException;
+import com.ardatas.exception.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,19 @@ import java.util.List;
 public class EngineerService {
 
     private final EngineerRepository engineerRepository;
+    private final ProjectRepository projectRepository;
 
-    public EngineerService(EngineerRepository engineerRepository) {
+    public EngineerService(EngineerRepository engineerRepository, ProjectRepository projectRepository) {
         this.engineerRepository = engineerRepository;
+        this.projectRepository = projectRepository;
     }
 
     private static EngineerRecord convertToRecord(Engineer engineer) {
         return new EngineerRecord(engineer.getId(), engineer.getName(), engineer.getTechStack());
+    }
+
+    private static ProjectRecord convertToRecord(Project project) {
+        return new ProjectRecord(project.getId(), project.getProjectName(), project.getStartDate(), project.getEngineer().getId());
     }
 
     public List<EngineerRecord> getEngineers() {
@@ -53,4 +62,27 @@ public class EngineerService {
                 .ifPresent(engineerRepository::delete);
     }
 
+
+    // PROJECT METHODS
+
+    public ProjectRecord addProject(Integer id, CreateProjectRecord create) {
+        Engineer engineer = engineerRepository.findById(id)
+                .orElseThrow(() -> new EngineerNotFoundException("Engineer with id " + id + " is not found!"));
+
+        Project entity = new Project(create.projectName(), create.startDate());
+        engineer.addProject(entity);
+        engineerRepository.save(engineer);
+
+        return convertToRecord(entity);
+
+    }
+
+    // Can and should work with entities in the service !
+    public void deleteProjectById(Integer engineerId, Integer projectId) {
+
+        Project project = projectRepository.findProjectById(engineerId, projectId)
+                .orElseThrow(() -> new ProjectNotFoundException("Project not found!"));
+
+        projectRepository.delete(project);
+    }
 }

@@ -1,7 +1,9 @@
 package com.ardatas.app;
 
 import com.ardatas.dto.CreateEngineerRecord;
+import com.ardatas.dto.CreateProjectRecord;
 import com.ardatas.dto.EngineerRecord;
+import com.ardatas.dto.ProjectRecord;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +34,7 @@ public class EngineerController {
     }
 
     @PostMapping
-    public EngineerRecord putEngineer(@Valid @RequestBody CreateEngineerRecord create) {
+    public EngineerRecord addEngineer(@Valid @RequestBody CreateEngineerRecord create) {
         return engineerService.addEngineer(create);
     }
 
@@ -45,5 +47,18 @@ public class EngineerController {
     public void deleteEngineerFromTop() {
         engineerService.deleteEngineerFromTop();
     }
+
+    // Projects
+
+    @PostMapping("/{id}/projects")
+    public ProjectRecord addProject(@PathVariable Integer id, @Valid @RequestBody CreateProjectRecord create) {
+        return engineerService.addProject(id, create);
+    }
+
+    @DeleteMapping("/{engineerId}/projects/{projectId}")
+    public void deleteProjectById(@PathVariable Integer engineerId, @PathVariable Integer projectId) {
+        engineerService.deleteProjectById(engineerId, projectId);
+    }
+
 }
 
