@@ -15,16 +15,12 @@ import java.util.List;
 
 public class EngineerController {
     private final EngineerService engineerService;
-    private final EngineerRepository engineerRepository;
 
-    public EngineerController(EngineerService engineerService, EngineerRepository engineerRepository) {
+    public EngineerController(EngineerService engineerService) {
         this.engineerService = engineerService;
-        this.engineerRepository = engineerRepository;
     }
 
-    // everything exposed to API is called Controller
-
-    // FOR RETRIEVEL
+    // everything exposed to the API is called Controller
 
     // PAGINATION OF THE RECORD, @PageableDefault for default paging vals
     // paginaton is zero indexed
@@ -54,6 +50,7 @@ public class EngineerController {
         engineerService.deleteEngineerFromTop();
     }
 
+    // Partly modify
     @PatchMapping("/{id}")
     public EngineerRecord updateEngineer(@PathVariable Integer id, @RequestBody UpdateEngineerRecord engineerRecord) {
         return engineerService.updateEngineer(id, engineerRecord);

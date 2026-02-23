@@ -4,6 +4,7 @@ import com.ardatas.dto.*;
 import com.ardatas.exception.EngineerNotFoundException;
 import com.ardatas.exception.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,7 @@ public class EngineerService {
     private final EngineerRepository engineerRepository;
     private final ProjectRepository projectRepository;
 
+    @Autowired
     public EngineerService(EngineerRepository engineerRepository, ProjectRepository projectRepository) {
         this.engineerRepository = engineerRepository;
         this.projectRepository = projectRepository;
