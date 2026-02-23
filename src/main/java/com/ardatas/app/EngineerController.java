@@ -2,6 +2,9 @@ package com.ardatas.app;
 
 import com.ardatas.dto.*;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,9 +25,13 @@ public class EngineerController {
     // everything exposed to API is called Controller
 
     // FOR RETRIEVEL
+
+    // PAGINATION OF THE RECORD, @PageableDefault for default paging vals
+    // paginaton is zero indexed
     @GetMapping()
-    public List<EngineerRecord> getEngineers() {
-        return engineerService.getEngineers();
+    public Page<EngineerRecord> getEngineers(@PageableDefault(size = 5, sort="name")
+                                                 Pageable pageable) {
+        return engineerService.getEngineers(pageable);
     }
 
     @GetMapping("/{id}")

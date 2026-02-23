@@ -4,6 +4,8 @@ import com.ardatas.dto.*;
 import com.ardatas.exception.EngineerNotFoundException;
 import com.ardatas.exception.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,12 +30,11 @@ public class EngineerService {
         return new ProjectRecord(project.getId(), project.getProjectName(), project.getStartDate(), project.getEngineer().getId());
     }
 
-    public List<EngineerRecord> getEngineers() {
-        return engineerRepository.findAll()
-        .stream()
-        .map(EngineerService::convertToRecord)
-        .toList();
-    }    
+    public Page<EngineerRecord> getEngineers(Pageable pageable) {
+        Page<Engineer> page = engineerRepository.findAll(pageable);
+        // static method stream
+        return page.map(EngineerService::convertToRecord);
+    }
 
     public EngineerRecord addEngineer(CreateEngineerRecord create) {
         Engineer entity = new Engineer(create.name(), create.techStack());
