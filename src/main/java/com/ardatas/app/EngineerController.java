@@ -41,6 +41,12 @@ public class EngineerController {
         return engineerService.addEngineer(create);
     }
 
+    @PostMapping("/sampleEngineer")
+    public EngineerRecord addSampleEngineer() {
+        CreateEngineerRecord create = new CreateEngineerRecord("Sample Engineer", "No TechStack");
+        return engineerService.addEngineer(create);
+    }
+
     @DeleteMapping("/{id}")
     public void deleteEngineerById(@PathVariable Integer id) {
         engineerService.deleteEngineerById(id);
