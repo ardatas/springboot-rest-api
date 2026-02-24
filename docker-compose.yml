@@ -13,11 +13,26 @@ services:
     ports:
       - "5332:5432"
     networks:
+      - app-network
+    restart: unless-stopped
+
+  app:
+    container_name: engineer-app
+    build: .
+    depends_on:
       - db
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/database
+        SPRING_DATASOURCE_USERNAME: ardatas
+        SPRING_DATASOURCE_PASSWORD: password
+    ports:
+        - "8080:8080"
+    networks:
+        - app-network
     restart: unless-stopped
 
 networks:
-  db:
+  app-network:
     driver: bridge
 
 volumes:

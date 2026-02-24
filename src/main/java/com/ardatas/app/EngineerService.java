@@ -4,6 +4,7 @@ import com.ardatas.dto.*;
 import com.ardatas.exception.EngineerNotFoundException;
 import com.ardatas.exception.ProjectNotFoundException;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,18 +12,14 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
+@RequiredArgsConstructor
 // BUSINESS LOGIC OF THE APPLICATION
 public class EngineerService {
 
     private final EngineerRepository engineerRepository;
     private final ProjectRepository projectRepository;
-
-    @Autowired
-    public EngineerService(EngineerRepository engineerRepository, ProjectRepository projectRepository) {
-        this.engineerRepository = engineerRepository;
-        this.projectRepository = projectRepository;
-    }
 
     private static EngineerRecord convertToRecord(Engineer engineer) {
         List<ProjectRecord> projectRecordList = engineer.getProjects().stream()
