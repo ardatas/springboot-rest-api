@@ -26,7 +26,7 @@ public class EngineerController {
     // PAGINATION OF THE RECORD, @PageableDefault for default paging vals
     // paginaton is zero indexed
     @GetMapping()
-    public Page<EngineerRecord> getEngineers(@PageableDefault(size = 5, sort="name")
+    public Page<EngineerRecord> getEngineers(@PageableDefault(size = 10, sort="name")
                                                  Pageable pageable) {
         return engineerService.getEngineers(pageable);
     }
